@@ -1,15 +1,15 @@
 package com.company;
 
-public class BSTNode implements IBSTNode {
+public class BSTNode /*implements IBSTNode*/ {
 	
-	Integer key;
-	String elem;
+	String key;
+	Integer elem;
 
 	BSTNode parent;
 	BSTNode left;
 	BSTNode right;
 
-	public BSTNode(Integer k, String e) {
+	public BSTNode(String k, Integer e) {
 		key = k;
 		elem = e;
 	}
@@ -57,8 +57,12 @@ public class BSTNode implements IBSTNode {
 		return getDepth(this);
 	}
 
+
 	public int getDepth(BSTNode node) {
-		return -1;
+		if (node == null)
+			return -1;
+		else
+			return 1 + getDepth(node.parent);
 	}
 
 	public void getPreorder() {
@@ -77,6 +81,9 @@ public class BSTNode implements IBSTNode {
 		getPostorder(this);
 	}
 
+	public void getOrder() { getOrder(this);}
+	public void goOver (){ goOver(this);}
+
 	public void getPreorder(BSTNode node) {
 		if 	(node == null) return;
 		System.out.println("("+node.key+" , "+node.elem+")");
@@ -86,26 +93,46 @@ public class BSTNode implements IBSTNode {
 
 	public void getInorder(BSTNode node) {
 		if (node==null) return;
-		getInorder(node.left);
-		System.out.println("("+node.key+" , "+node.elem+")");
 		getInorder(node.right);
+		System.out.println("("+node.key+" , "+node.elem+")");
+		getInorder(node.left);
 	}
+	public void getOrder(BSTNode node){
+		if (node==null) return;
+		getInorder(node.right);
+		System.out.println("("+node.key+" , "+node.elem+")");
+		getInorder(node.left);
 
+	}
 	public void getPostorder(BSTNode node) {
+		if (node==null) return;
 		getPostorder(node.left);
 		getPostorder(node.right);
 		System.out.println("("+node.key+" , "+node.elem+")");
 	}
 
-	public void getLevelOrder(BSTNode node) {
-		System.out.println("("+node.key+" , "+node.elem+")");
-		getLevelOrder(node.left);
-		getLevelOrder(node.right);
-		
+
+	public void getLevelorder(BSTNode node) {
+		if (node != null) {
+			for (int i = 0; i < getHeight(node); i++)
+				getLevelorder(node, i);
+		}
 	}
 
-	public void getLevelOrder(BSTNode node, int level) {
-
+	public void getLevelorder(BSTNode node, int level) {
+		if (node != null) {
+			if (level == 0)
+				System.out.println("(" + node.key + "," + node.elem + ")");
+			else {
+				getLevelorder(node.left, level - 1);
+				getLevelorder(node.right, level - 1);
+			}
+		}
+	}
+	public void goOver (BSTNode node){
+		if (node==null) return;
+		getInorder(node.right);
+		getInorder(node.left);
 	}
 
 }

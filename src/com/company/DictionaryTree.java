@@ -1,59 +1,90 @@
 package com.company;
 
-public class BSTree implements IBSTree {
+
+public class DictionaryTree /*implements IBSTree*/ {
 
 	BSTNode root;
 
 	public void getPreorder() {
-		root.getPreorder();
+		if (root != null)
+			root.getPreorder();
 	}
 
 	public void getInorder() {
-		root.getInorder();
+		if (root != null)
+			root.getInorder();
 	}
 
 	public void getPostorder() {
-		root.getPostorder();
+		if (root != null)
+			root.getPostorder();
+	}
+
+	public void getLevelorder() {
+		if (root != null)
+			root.getLevelorder();
+	}
+	public void getOrder(){
+		if (root != null)root.getOrder();
 	}
 
 	public int getSize() {
+		if (root == null)
+			return 0;
 		return root.getSize();
 	}
 
 	public int getHeight() {
+		if (root == null)
+			return 0;
 		return root.getHeight();
 	}
 
-	public void insert(Integer key, String element) {
-		BSTNode newNode = new BSTNode(key, element);
+	public int getDepth() {
 		if (root == null)
-			root = newNode;
-		else
-			insert(newNode, root);
+			return 0;
+		return root.getDepth();
+	}
+	public void goOver(){
+		if (root != null)root.goOver();
 	}
 
-	public void insert(BSTNode newNode, BSTNode node) {
-		Integer key = newNode.key;
-		if (key.compareTo(node.key) == 0) {
-			System.out.println(key + " already exists. Duplicates are not allowed!!!.");
-			return;
+	public void add(SQueue queue) {
+		int fr = 1;
+		for (int k = 0; k < queue.getSize(); k++) {
+			BSTNode newNode = new BSTNode(queue.getAt(k), fr);
+			if (root == null){
+				root = newNode;
+			}
+				add(newNode, root);
 		}
+	}
+
+	public void add(BSTNode newNode, BSTNode node) {
+		String key = newNode.key;
+		if (key.compareTo(node.key) == 0) {node.elem+=1;return;}
+
 		if (key.compareTo(node.key) < 0) {
 			if (node.left == null) {
 				node.left = newNode;
 				newNode.parent = node;
 			} else
-				insert(newNode, node.left);
+				add(newNode, node.left);
 		} else {
 			if (node.right == null) {
 				node.right = newNode;
 				newNode.parent = node;
 			} else
-				insert(newNode, node.right);
+				add(newNode, node.right);
 		}
 	}
 
-	public void remove(Integer key) {
+	public void show (char c){
+		if (c == 'a')getInorder();
+		else getOrder();
+	}
+
+	public void remove(String key) {
 		if (root == null) {
 			System.out.println("Cannot remove: The tree is empty");
 			return;
@@ -74,7 +105,7 @@ public class BSTree implements IBSTree {
 			remove(key, root);
 	}
 
-	public boolean remove(Integer key, BSTNode node) {
+	public boolean remove(String key, BSTNode node) {
 		if (node == null) {
 			System.out.println("Cannot remove: The key doesn't exist");
 			return false;
@@ -127,53 +158,84 @@ public class BSTree implements IBSTree {
 		node.key = sucesorNode.key;
 		remove(sucesorNode.key, node.right);
 		return true;
-		//Finally, we must remove the sucesorNode
+		//Finally, we must remove the sucesor Node
 	}
 
 	public BSTNode findMin(BSTNode node) {
-		return null;
+		if (node != null)
+			while (node.left != null)
+				node = node.left;
+		return node;
 	}
 
 	public BSTNode findRecMin(BSTNode node) {
-		return null;
+		if (node == null)
+			return null;
+		else if (node.left == null)
+			return node;
+		return findRecMin(node.left);
 	}
 
 	public BSTNode findMax(BSTNode node) {
-		return null;
+		if (node != null)
+			while (node.right != null)
+				node = node.right;
+		return node;
 	}
 
 	public BSTNode findRecMax(BSTNode node) {
-		return null;
+		if (node == null)
+			return null;
+		else if (node.right == null)
+			return node;
+		return findRecMax(node.right);
 	}
 
-	public String find(Integer key) {
-		return find(root, key);
+	public Integer search(String key) {
+		return search(root, key);
 	}
 
-	public String find(BSTNode node, Integer key) {
+	public Integer search(BSTNode node, String key) {
 		if (node == null)
 			return null;
 		else if (key.compareTo(node.key) < 0)
-			return find(node.left, key);
+			return search(node.left, key);
 		else if (key.compareTo(node.key) > 0)
-			return find(node.right, key);
+			return search(node.right, key);
 		else
 			return node.elem;
 	}
 
-	public String findIt(Integer key) {
+	public Integer findIt(String key) {
 		BSTNode searchNode = root;
 		while (searchNode != null) {
-			int keyVisit = searchNode.key;
-			if (key == keyVisit)
+			String keyVisit = searchNode.key;
+			if (key.equals(keyVisit))
 				return searchNode.elem;
-			else if (key < keyVisit)
+			else if (key.compareTo(keyVisit) <0 )
 				searchNode = searchNode.left;
-			else if (key > keyVisit)
+			else if (key.compareTo(keyVisit)>0)
 				searchNode = searchNode.right;
 		}
 		System.out.println(key + " does not exist");
 		return null;
 	}
+
+	/*public DictionaryTree getTop(int n){
+		DictionaryTree newDictionary = new DictionaryTree();
+		BSTNode node = root;
+		BSTNode newNode =root;
+		while (newDictionary.getSize() <= n){
+			if (node == null)
+				add(newNode,node);
+			else if (node.compareTo(node.key) < 0)
+				return search(node.left, key);
+			else if (key.compareTo(node.key) > 0)
+				return search(node.right, key);
+			else
+		}
+		newDictionary.getInorder();
+		return newDictionary;
+	}*/
 
 }
