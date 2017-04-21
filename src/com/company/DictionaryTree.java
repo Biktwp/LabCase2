@@ -221,10 +221,25 @@ public class DictionaryTree /*implements IBSTree*/ {
 		return null;
 	}
 
-	public DictionaryTree getTop(int n){
+	public DictionaryTree getTop(int n ){
 		DictionaryTree newDictionary = new DictionaryTree();
-		BSTNode node = root;
-		BSTNode newNode =root;
+		BSTNode searchNode = root;
+		int i = 0;
+		if (newDictionary.root == null){
+			newDictionary.root = searchNode;
+		}
+		while (searchNode != null || i <= 4) {
+			Integer keyVisit = searchNode.elem;
+			if (newDictionary.root.elem - keyVisit == 0) {
+				newDictionary.add(searchNode, newDictionary.root);
+			}
+			else if (newDictionary.root.elem - keyVisit < 0)
+				searchNode = searchNode.left;
+			else if (newDictionary.root.elem - keyVisit > 0)
+				searchNode = searchNode.right;
+			System.out.println(searchNode.key);
+			i++;
+		}
 
 		newDictionary.getInorder();
 		return newDictionary;
