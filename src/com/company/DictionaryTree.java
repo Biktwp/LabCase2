@@ -229,5 +229,6 @@ public class DictionaryTree /*implements IBSTree*/ {
 		newDictionary.getInorder();
 		return newDictionary;
 	}
+//hola
 
 }
