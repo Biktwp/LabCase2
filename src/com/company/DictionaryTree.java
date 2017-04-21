@@ -62,7 +62,7 @@ public class DictionaryTree /*implements IBSTree*/ {
 
 	public void add(BSTNode newNode, BSTNode node) {
 		String key = newNode.key;
-		if (key.compareTo(node.key) == 0) {node.elem+=1;return;}
+		if (key.compareTo(node.key) == 0) {node.elem++;return;}
 
 		if (key.compareTo(node.key) < 0) {
 			if (node.left == null) {
@@ -221,21 +221,13 @@ public class DictionaryTree /*implements IBSTree*/ {
 		return null;
 	}
 
-	/*public DictionaryTree getTop(int n){
+	public DictionaryTree getTop(int n){
 		DictionaryTree newDictionary = new DictionaryTree();
 		BSTNode node = root;
 		BSTNode newNode =root;
-		while (newDictionary.getSize() <= n){
-			if (node == null)
-				add(newNode,node);
-			else if (node.compareTo(node.key) < 0)
-				return search(node.left, key);
-			else if (key.compareTo(node.key) > 0)
-				return search(node.right, key);
-			else
-		}
+
 		newDictionary.getInorder();
 		return newDictionary;
-	}*/
+	}
 
 }

@@ -33,7 +33,8 @@ public class Test {
             }*/
 			bstree.add(queue);
 			//bstree.getInorder();
-			bstree.show('c');
+			//bstree.show('c');
+			//bstree.getLevelorder();
 			System.out.println(bstree.search("by"));
 		} catch (IOException e) {//if it is an error make the e.printStackTrace
 			e.printStackTrace();
