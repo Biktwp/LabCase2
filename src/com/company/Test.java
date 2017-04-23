@@ -26,17 +26,16 @@ public class Test {
 		SQueue queue = new SQueue();
 		DictionaryTree bstree = new DictionaryTree();
 		Dictionary dictionary = new Dictionary();
+		DictionaeyTreeFreq bsftree = new DictionaeyTreeFreq();
 		try {
 			queue.addWords(reader(f));//We adding the words in the queue
-            /*System.out.println("hol"+reader(f).length);
-            for(int i=0;i<queue.getSize();i++){
-                System.out.println(queue.getAt(i));
-            }*/
             dictionary.add(queue);
 			bstree.add(queue);
-			bstree.show('c');
-			bstree.getTop(10,dictionary);
-			bstree.getLow(10,dictionary);
+			//bstree.show('c');
+			//bstree.getTop(10,dictionary);
+			//bstree.getLow(10,dictionary);
+			bsftree.save(dictionary);
+			bsftree.getInorder();
 			System.out.println(bstree.search("by"));
 		} catch (IOException e) {//if it is an error make the e.printStackTrace
 			e.printStackTrace();
