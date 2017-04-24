@@ -7,7 +7,7 @@ public class DictionaeyTreeFreq {
 
     BSTFreqNode root;
 
-    public void save(Dictionary newDictionary){
+    public void save(Dictionary newDictionary){//This method is used to introduce the frequency
         DNode aux = newDictionary.header.next;
 
         while (aux != newDictionary.trailer){
@@ -18,7 +18,7 @@ public class DictionaeyTreeFreq {
         }
     }
 
-    public void add(Integer key,String elem, BSTFreqNode node) {
+    public void add(Integer key,String elem, BSTFreqNode node) {//This method is used to store the frequency and the words in the BST
         BSTFreqNode nod = root;
         //Integer key = newNode.key;
         BSTFreqNode newNode = new BSTFreqNode(key,elem);
