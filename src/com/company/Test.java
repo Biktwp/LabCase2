@@ -35,7 +35,6 @@ public class Test {
 			//bstree.getTop(10,dictionary);
 			//bstree.getLow(10,dictionary);
 			bsftree.save(dictionary);
-			bsftree.getInorder();
 			System.out.println(bstree.search("by"));
 		} catch (IOException e) {//if it is an error make the e.printStackTrace
 			e.printStackTrace();

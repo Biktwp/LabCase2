@@ -42,8 +42,4 @@ public class DictionaeyTreeFreq {
             }
         }
     }
-    public void getInorder() {
-        if (root != null)
-            root.getInorder();
-    }
 }

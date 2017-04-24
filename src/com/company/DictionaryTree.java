@@ -7,7 +7,7 @@ public class DictionaryTree {
 
 
 
-	public void getInorder() {//This method is to order and print ADT in alphabetical order
+	public void getInorder() {//This method is to order and print ADT in alphabetical order.
 		if (root != null)
 			root.getInorder();
 	}
